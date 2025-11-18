@@ -1,0 +1,45 @@
+repair_all_barriers()
+{
+    foreach (barrier in level.exterior_goals)
+    {
+        if (!isdefined(barrier.zbarrier))
+            continue;
+
+        for (i = 0; i < barrier.zbarrier getnumzbarrierpieces(); i++)
+        {
+            barrier.zbarrier showzbarrierpiece(i);
+            barrier.zbarrier setzbarrierpiecestate(i, "closing");
+        }
+    }
+}
+
+break_all_barriers()
+{
+    foreach (barrier in level.exterior_goals)
+    {
+        if (!isdefined(barrier.zbarrier))
+            continue;
+
+        for (i = 0; i < barrier.zbarrier getnumzbarrierpieces(); i++)
+        {
+            barrier.zbarrier setzbarrierpiecestate(i, "opening");
+        }
+    }
+}
+
+SliderBarrier(barrier)
+{
+    switch(barrier)
+    {
+        case "Repair All":
+            self repair_all_barriers();   
+        break;
+
+        case "Break All":
+            self break_all_barriers();
+        break;
+
+        default:
+            break;
+    }
+}
