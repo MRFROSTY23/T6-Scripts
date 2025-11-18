@@ -65,3 +65,53 @@ vector_scale( vec, scale )
     vec = ( vec[ 0] * scale, vec[ 1] * scale, vec[ 2] * scale );
     return vec;
 }
+
+//The ilog Function Works For Infinity Loader Only
+//Prints Your Location To The Debugger
+PrintCurrentLoc()
+{
+   ilog( "Your Position: ^2" + ( self.origin + "^7." ) );
+}
+
+doNewOrigin(origin)
+{
+	self setOrigin(origin);
+}
+
+//Prints Off Your Xuid Code To Your Screen Allows You To Lock or Do Certain Things To Players
+printoffxuid(player)
+{
+    if(player getxuid() == "")
+    playerXUID = self getxuid();
+    self iprintlnbold(self getxuid(0));
+}
+
+array_contains(array, value)
+{
+	for(i = 0; i < array.size; i++)
+	{
+		if(array[i] == value)
+			return true;
+	}
+	return false;
+}
+
+array_randomize( array )
+{
+    for ( i = 0; i < array.size; i++ )
+    {
+        j = randomint( array.size );
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    return array;
+}
+
+divideColor(c1,c2,c3,ignore)
+{
+    if(isDefined(ignore))
+        return (c1, c2, c3);
+    return (c1 /255, c2 /255, c3 /255);
+}
