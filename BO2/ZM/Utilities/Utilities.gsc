@@ -115,3 +115,106 @@ divideColor(c1,c2,c3,ignore)
         return (c1, c2, c3);
     return (c1 /255, c2 /255, c3 /255);
 }
+
+//Some Useful Stuff //Credits To xeirh For This
+is_value( value )
+{
+    return isdefined( value ) && ( isint( value ) || isfloat( value ) );
+}
+
+is_valid() 
+{
+    if( isdefined( self ) || isalive( self ) || isplayer( self ) || self.sessionstate != "spectator" || self.sessionstate != "intermission" )
+        return true;
+
+    return false;
+}
+
+is_explosive_damage( mod )
+{
+    if( mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE" )
+        return true;
+
+    return false;
+}
+
+get_name()
+{
+    name = self.name;
+    if( name[ 0 ] != "[" )
+        return name;
+
+    for( a = ( name.size - 1 ); a >= 0; a-- )
+    {
+        if( name[ a ] == "]" )
+            break;
+    }
+
+    return getsubstr( name, ( a + 1 ) );
+}
+
+clean_text( text )
+{
+    if( !isdefined( text ) || text == "" )
+        return;
+
+    if( text[ 0 ] == toupper( text[ 0 ] ) )
+    {
+        if( issubstr( text, " " ) && !issubstr( text, "_" ) )
+            return text;
+    }
+
+    text       = strtok( tolower( text ), "_" );
+    new_string = "";
+    for( a = 0; a < text.size; a++ )
+    {
+        illegal     = array( "specialty", "player", "weapon", "wpn", "viewmodel", "camo" );
+        replacement = " ";
+        if( isinarray( illegal, text[ a ] ) )
+        {
+            for( b = 0; b < text[ a ].size; b++ )
+            {
+                if( b != 0 )
+                    new_string += text[ a ][ b ];
+                else
+                    new_string += toupper( text[ a ][ b ] );
+            }
+
+            if( a != ( text.size - 1 ) )
+                new_string += replacement;
+        }
+    }
+
+    return new_string;
+}
+
+clean_name( name )
+{
+    if( !isdefined( name ) || name == "" )
+        return;
+
+    illegal    = array( "^A", "^B", "^F", "^H", "^I", "^0", "^1", "^2", "^3", "^4", "^5", "^6", "^7", "^8", "^9" );
+    new_string = "";
+    for( a = 0; a < name.size; a++ )
+    {
+        if( a < ( name.size - 1 ) )
+        {
+            if( isinarray( illegal, ( name[ a ] + name[ ( a + 1 ) ] ) ) )
+            {
+                a += 2;
+                if( a >= name.size )
+                    break;
+            }
+        }
+
+        if( isdefined( name[ a ] ) && a < name.size )
+            new_string += name[ a ];
+    }
+
+    return new_string;
+}
+
+calculate_distance( origin, destination, velocity )
+{
+    return ( distance( origin, destination ) / velocity );
+}
