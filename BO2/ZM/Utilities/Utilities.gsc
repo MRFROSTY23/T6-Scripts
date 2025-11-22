@@ -218,3 +218,21 @@ calculate_distance( origin, destination, velocity )
 {
     return ( distance( origin, destination ) / velocity );
 }
+
+//Checks If Its Defined
+is_true( check )
+{
+	if ( isDefined( check ) )
+	{
+		return check;
+	}
+}
+
+//Checks If Its Undefined
+is_false( check )
+{
+	if ( isDefined( check ) )
+	{
+		return !check;
+	}
+}
