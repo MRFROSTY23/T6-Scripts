@@ -1,5 +1,5 @@
 //Works On Transit | Buried | Die Rise
-//Dont Work On Mob | Origins
+//Dont Work On Mob | Origins Correctly
 zombie_devgui_build( buildable )
 {
 
