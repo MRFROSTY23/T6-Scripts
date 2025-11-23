@@ -2,7 +2,7 @@
 
 player_damage( einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex )
 {
-    if( isdefined( self.GodMode ) && self.GodMode )//self.GodMode Is The Name Of My God Mode Function So Just Change It To Whater Your True | False Is
+    if( isdefined( self.GodMode ) && self.GodMode )//self.GodMode Is The Name Of My God Mode Function So Just Change It To Whatever Your True | False Is
         return;
     
     [[ level.player_damage ]]( einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex );
